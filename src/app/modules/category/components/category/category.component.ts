@@ -66,7 +66,22 @@ export class CategoryComponent implements OnInit{
       duration: 2000
     })
   }
+  edit(id:number, name:string,description:string){
+    const dialogRef = this.dialog.open(NewCategoryComponent, {
+      data: {id,name,description},
+      width:'450px',
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      if(result === 1){
+        this.openSnackBar("Categoría Editada", "Exitosa");
+        this.getCategories();
+      }else if(result===2){
+        this.openSnackBar("Se produjo un error", "Error");
+      }
+    });
+  }
 }
+
 
 export interface CategoryElement {
 
